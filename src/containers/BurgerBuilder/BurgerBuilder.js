@@ -8,7 +8,6 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 
-
 const INGREDIENT_PRICES = {
     salad: 0.5,
     cheese: 0.4,
@@ -30,6 +29,7 @@ class BurgerBuilder extends Component {
         error: false
      }
      componentDidMount() {
+        console.log(this.props);
         axios.get('/ingredients.json')
             .then(response => {
                 // console.log(response);
@@ -89,30 +89,40 @@ class BurgerBuilder extends Component {
     }
     purchaseContinueHandler = () => {
         // alert('You continue..!');
-        this.setState({ loading: true})
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'sakthi',
-                address: {
-                    street: 'Velmurugan nagar',
-                    zipCode: '638506',
-                    country: 'India'
-                },
-                email: 'test@test.com'
-            },
-            deliveryMethod: 'fastest'
+        // this.setState({ loading: true})
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalPrice,
+        //     customer: {
+        //         name: 'sakthi',
+        //         address: {
+        //             street: 'Velmurugan nagar',
+        //             zipCode: '638506',
+        //             country: 'India'
+        //         },
+        //         email: 'test@test.com'
+        //     },
+        //     deliveryMethod: 'fastest'
+        // }
+        // axios.post('/orders.json', order)
+        //     .then(response => {
+        //         console.log(response);
+        //         this.setState({ loading: false, purchasing: false});
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         this.setState({ loading: false, purchasing: false});
+        //     });
+        const queryParms = [];
+        for (let i in this.state.ingredients) {
+            queryParms.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         }
-        axios.post('/orders.json', order)
-            .then(response => {
-                console.log(response);
-                this.setState({ loading: false, purchasing: false});
-            })
-            .catch(error => {
-                console.log(error);
-                this.setState({ loading: false, purchasing: false});
-            });
+        queryParms.push('price=' + this.state.totalPrice);
+        const queryString = queryParms.join('&');
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        });
     }
     render() { 
         const disabledInfo = {

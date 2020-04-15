@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Order.module.scss';
 
 const order = (props) => {
-    console.log(props);
+    // console.log(props);
     const ingredients = [];
     for (let ingName in props.ingredients) {
         ingredients.push(

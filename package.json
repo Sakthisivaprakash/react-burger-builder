@@ -38,6 +38,9 @@
     ]
   },
   "devDependencies": {
-    "node-sass": "^4.13.1"
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "node-sass": "^4.13.1",
+    "react-test-renderer": "^16.13.1"
   }
 }

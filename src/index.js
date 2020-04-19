@@ -36,9 +36,9 @@ sagaMiddleware.run(watchOrder);
 const app = (
   <Provider store={store}>
     <Router>
-      <React.StrictMode>
+      {/* <React.StrictMode> */}
         <App />
-      </React.StrictMode>
+      {/* </React.StrictMode> */}
     </Router>
   </Provider>
 );

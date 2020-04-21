@@ -1,8 +1,21 @@
 import React from 'react';
-import classes from './Backdrop.module.scss';
+import './Backdrop.scss';
+import CSSTransition from 'react-transition-group/CSSTransition';
+
+const animationTiming = {
+    enter: 400,
+    exit: 600
+}
 
 const backdrop = (props) => (
-    props.show ? <div className={classes.Backdrop} onClick={props.clicked}></div> : null
+    <CSSTransition
+    in={props.show}
+    timeout={animationTiming}
+    unmountOnExit
+    mountOnEnter
+    classNames="fade-backdrop">
+        <div className="Backdrop" onClick={props.clicked}></div>
+    </CSSTransition>
 );
  
 export default backdrop;

@@ -3,7 +3,8 @@ import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
-import ContactData from './ContactData/ContactData';
+// import ContactData from './ContactData/ContactData';
+import ContactDataForm from './ContactData/ContactDataForm';
 
 const Checkout = props => {
     const checkoutCancelled = () => {
@@ -23,9 +24,12 @@ const Checkout = props => {
                     ingredients={props.ings} 
                     onCheckoutCancelled={checkoutCancelled} 
                     onCheckoutContinued={checkoutContinued}/>
+                {/* <Route 
+                    path={props.match.path + '/contact-data'} 
+                    component={ContactData}/> */}
                 <Route 
                     path={props.match.path + '/contact-data'} 
-                    component={ContactData}/>
+                    component={ContactDataForm}/>                    
             </div>
         );
     }
